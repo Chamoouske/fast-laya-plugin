@@ -50,7 +50,9 @@ The script:
    (`claude plugin marketplace add Chamoouske/fast-laya-plugin`), or refreshes
    it if it is already there (`claude plugin marketplace update`).
 4. Installs the plugin in user scope
-   (`claude plugin install fast-laya-plugin@fast-laya-plugin`).
+   (`claude plugin install fast-laya-plugin@fast-laya-plugin`), or updates it
+   to the latest version if it is already installed
+   (`claude plugin update fast-laya-plugin@fast-laya-plugin`).
 5. Warns if `CLAUDE_CODE_ENABLE_FUNCTION_HOOKS` is not set to `1`, and prints
    the command that sets it.
 

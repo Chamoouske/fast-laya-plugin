@@ -40,7 +40,12 @@ if ($marketplaces -match [regex]::Escape($Plugin)) {
 }
 
 Step "plugin $Plugin@$Plugin"
-Invoke-Native 'claude' @('plugin', 'install', "$Plugin@$Plugin")
+$plugins = (& claude plugin list) -join "`n"
+if ($plugins.Contains("$Plugin@$Plugin")) {
+    Invoke-Native 'claude' @('plugin', 'update', "$Plugin@$Plugin")
+} else {
+    Invoke-Native 'claude' @('plugin', 'install', "$Plugin@$Plugin")
+}
 
 $userFlag = [Environment]::GetEnvironmentVariable('CLAUDE_CODE_ENABLE_FUNCTION_HOOKS', 'User')
 if ($env:CLAUDE_CODE_ENABLE_FUNCTION_HOOKS -ne '1' -and $userFlag -ne '1') {
