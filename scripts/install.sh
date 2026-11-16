@@ -39,7 +39,11 @@ else
 fi
 
 step "plugin $PLUGIN@$PLUGIN"
-claude plugin install "$PLUGIN@$PLUGIN"
+if claude plugin list | grep -qF "$PLUGIN@$PLUGIN"; then
+  claude plugin update "$PLUGIN@$PLUGIN"
+else
+  claude plugin install "$PLUGIN@$PLUGIN"
+fi
 
 if [ "${CLAUDE_CODE_ENABLE_FUNCTION_HOOKS:-}" != "1" ]; then
   printf '\nwarning: function hooks are off. Add this to your shell profile (~/.bashrc, ~/.zshrc):\n'
